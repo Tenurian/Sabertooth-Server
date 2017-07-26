@@ -274,8 +274,8 @@ io.on('connection', function(socket){
                 out.TAFB = parseFloat(TAFB);
                 out.carryover = parseFloat(carryover);
 
-                out.days_off = final.ovn.map(function (t, i, a) {
-                    if(/ [X:] /.exec(t)){
+                out.work_days = final.ovn.map(function (t, i, a) {
+                    if(!/ [X:] /.exec(t)){
                         // console.log('BLK NO. ',blk_no, t, i, days[i], dates[i]);
                         return {
                             date: parseInt(dates[i]),
