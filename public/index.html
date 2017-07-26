@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="theme-color" content="#000000">
+        <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js" ></script>
+        <title>FareFly</title>
+        <style>
+            .trip{
+                background-color: aquamarine;
+            }
+
+            .deadhead{
+                background-color: aquamarine;
+            }
+        </style>
+    </head>
+    <body>
+        <noscript>
+            You need to enable JavaScript to run this app.
+        </noscript>
+        <div>
+            <form id="airportForm">
+                <span id="out" style="font-family: monospace"></span>
+                <br/>
+                <label>Airport Code: </label>
+                <input maxlength="3" type="text" placeholder="Airport Code, ex: 'DFW' or 'ORD'" id="airportInput">
+            </form>
+        </div>
+        <div id="root" style="font-family: monospace; white-space: pre"></div>
+        <script type="text/babel">
+            const socket = new io();
+            let data;
+            socket.on('load_data',(d) => {
+                data = d;
+                console.log(data);
+                document.getElementById('root').innerHTML = data.text;
+//                let response = JSON.parse(msg.data);
+//                if(response.type === 'load_data'){
+//                    data = response.data;
+//                    document.getElementById('root').innerHTML = response.data.text
+//                }
+            });
+        </script>
+    </body>
+</html>
+

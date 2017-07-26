@@ -1,0 +1,19 @@
+{
+  "name": "sabertooth-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "fs": "^0.0.1-security",
+    "mongoose": "^4.11.4",
+    "socket.io": "^2.0.3",
+    "textract": "^2.1.2",
+    "ws": "^3.0.0"
+  }
+}
