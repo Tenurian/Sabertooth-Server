@@ -34,16 +34,21 @@
         <div id="root" style="font-family: monospace; white-space: pre"></div>
         <script type="text/babel">
             const socket = new io();
-            let data;
-            socket.on('load_data',(d) => {
-                data = d;
-                console.log(data);
-                document.getElementById('root').innerHTML = data.text;
-//                let response = JSON.parse(msg.data);
-//                if(response.type === 'load_data'){
-//                    data = response.data;
-//                    document.getElementById('root').innerHTML = response.data.text
-//                }
+            socket.emit('request_text');
+            socket.emit('request_airports');
+            let data = {};
+            socket.emit('GFL',{days_off: [], start_time: 0});
+            socket.on('LFL', (l) => {
+                data['lines'] = l;
+                console.log('lines loaded');
+            });
+            socket.on('load_airports', (a) => {
+                data['airports'] = a;
+                console.log('airports loaded');
+            });
+            socket.on('load_text',(t) => {
+                console.log('text loaded');
+                document.getElementById('root').innerHTML = t;
             });
         </script>
     </body>
