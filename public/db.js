@@ -19,13 +19,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var Schema = mongoose.Schema;
 
-var UserSchema = new Schema({
-    username: {type: String, required: true, unique: true},
-    password: {type: Object, required: true},
-    bids: [Schema.Types.ObjectId],
-    rank: {type: Number, required: true}
-});
-
 var LineSchema = new Schema({
     sequences: [{
         days: [{
@@ -62,7 +55,6 @@ var LineSchema = new Schema({
     }]
 });
 
-var User = mongoose.model('User', UserSchema);
 var Line = mongoose.model('Line', LineSchema);
 
 var filePath = 'public/DOC_FLIGHT_AUG17_ordCRJp.txt';
@@ -367,31 +359,11 @@ function init_lines(){
 }
 //init_lines();
 
-User.findOne({username: 'admin'}).exec(function (err, user) {
-   if(err) throw err;
-   if(user){
-       console.log('Admin exists.');
-   } else {
-       var admin = new User({
-           username: 'admin',
-           // password: CryptoJS.SHA256('3p8%7r7k9#2i').toString(),
-           password: 'password',
-           bids: [],
-           rank: -1
-       });
-       admin.save(function (err) {
-           if(err) console.log(err);
-           console.log(JSON.stringify(admin, null, 4), 'saved admin');
-       })
-   }
-});
-
 Line.findOne({id: 501}).exec(function (err, line_501) {
     if(err) throw err;
     console.log(JSON.stringify(line_501, null, 4));
 });
 
 module.exports = {
-    User: User,
     Line: Line
 };

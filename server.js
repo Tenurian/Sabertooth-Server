@@ -1,18 +1,18 @@
-var express = require('express');
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var path = require('path');
-var textract = require('textract');
-var fs = require('fs');
-var db = require('./public/db.js');
-var passport = require('passport');
-var session = require('express-sessions');
-var cookie_parser = require('cookie-parser');
-var body_parser = require('body-parser');
+var express         = require('express');
+var app             = require('express')();
+var http            = require('http').Server(app);
+var io              = require('socket.io')(http);
+var path            = require('path');
+var textract        = require('textract');
+var fs              = require('fs');
+var db              = require('./public/db.js');
+var passport        = require('passport');
+var session         = require('express-session');
+var cookieParser    = require('cookie-parser');
+var bodyParser      = require('body-parser');
 
-app.use(cookie_parser);
-app.use(body_parser);
+app.use(cookieParser());
+app.use(bodyParser());
 app.use(session({ secret: 'developmentsecretpassphrase'}));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -21,8 +21,6 @@ var airports = require('./public/airports.js').filter(function(el) {
     return el.name !== "" && el.name !== null
 });
 var lines = require('./public/lines');
-
-/**/
 
 function getMarkedDates(line, color, textColor){
     textColor = (textColor === undefined)? '#000' : textColor;
@@ -221,19 +219,11 @@ io.on('connection', function(socket){
     });
 });
 
-function isLoggedIn(res, res, next){
-    if (req.isAuthenticated())
-        return next();
+require('./config/passport')(passport);
 
-    // if they aren't redirect them to the home page
-    res.sendStatus(403);
-}
+require('./app/routes.js')(app, passport);
 
-app.get('/logout', function(req,res){
-
-});
-
-app.use('/', function(req, res){
+app.get('/', function(req, res){
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
