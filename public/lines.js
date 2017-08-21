@@ -12,7 +12,7 @@ var lines = [
                         "deadhead_time": 0,
                         "time_off_ground": 358,
                         "FDP": 651,
-                        "off_duty_period": "1524",
+                        "off_duty_period": 1524,
                         "flights": [
                             {
                                 "deadhead": false,
@@ -56,7 +56,7 @@ var lines = [
                         "time_off_ground": 524,
                         "FDP": 836,
                         "FDPLim": "1300",
-                        "off_duty_period": "1524",
+                        "off_duty_period": 1524,
                         "flights": [
                             {
                                 "deadhead": false,
@@ -114,7 +114,7 @@ var lines = [
                         "time_off_ground": 219,
                         "FDP": 428,
                         "FDPLim": "1200",
-                        "off_duty_period": "2103",
+                        "off_duty_period": 2103,
                         "flights": [
                             {
                                 "deadhead": false,
@@ -208,7 +208,7 @@ var lines = [
                         "deadhead_time": 0,
                         "time_off_ground": 400,
                         "FDP": 715,
-                        "off_duty_period": "1345",
+                        "off_duty_period": 1345,
                         "flights": [
                             {
                                 "deadhead": false,
@@ -252,7 +252,7 @@ var lines = [
                         "time_off_ground": 345,
                         "FDP": 810,
                         "FDPLim": "1300",
-                        "off_duty_period": "1455",
+                        "off_duty_period": 1455,
                         "flights": [
                             {
                                 "deadhead": false,

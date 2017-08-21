@@ -36,11 +36,22 @@
             const socket = new io();
             socket.emit('request_text');
             socket.emit('request_airports');
-            let data = {};
-            socket.emit('GFL',{days_off: [], start_time: 0});
-            socket.on('LFL', (l) => {
-                data['lines'] = l;
-                console.log('lines loaded');
+            let data = {airports: {}, lines: {}};
+            let filter = {days_off: [], start_time: 0};
+            socket.emit('GGL',filter);
+            socket.on('LGL', (d) => {
+                console.log('Green Days Loaded!');
+                data.lines.green_lines = d;
+                socket.emit('GYL', filter);
+            });
+            socket.on('LYL', (d) => {
+                console.log('Yellow Days Loaded!');
+                data.lines.yellow_lines = d;
+                socket.emit('GRL', filter);
+            });
+            socket.on('LRL', (d) => {
+                console.log('Red Days Loaded!');
+                data.lines.red_lines = d;
             });
             socket.on('load_airports', (a) => {
                 data['airports'] = a;
